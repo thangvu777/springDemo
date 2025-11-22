@@ -22,6 +22,6 @@ public class Application implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        IO.println("Results String Service: " + stringService.getLengthAndFrequencyCount());
+        IO.println("TEST 1 _ Results String Service: " + stringService.getLengthAndFrequencyCount());
     }
 }
