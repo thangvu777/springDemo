@@ -22,6 +22,7 @@ public class Application implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        IO.println("TEST 1 _ Results String Service: " + stringService.getLengthAndFrequencyCount());
+        IO.println("TEST 1 _ Results String Service Map < length, frequency > : " + stringService.getLengthAndFrequencyCount());
+        IO.println("TEST 2 _ Results String Service Partition [ even length , odd length ]: " + stringService.getLengthAndFrequencyCountPartition());
     }
 }

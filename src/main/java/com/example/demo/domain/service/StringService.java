@@ -3,10 +3,7 @@ package com.example.demo.domain.service;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -19,6 +16,15 @@ public class StringService {
                         Collectors.groupingBy(
                                 String::length,
                                 Collectors.counting()
+                        )
+                );
+    }
+
+    public Map<Boolean, List<String>> getLengthAndFrequencyCountPartition() {
+        return strings.stream()
+                .collect(
+                        Collectors.partitioningBy(str -> str.length() % 2 == 0,
+                                Collectors.toCollection(LinkedList::new)
                         )
                 );
     }
