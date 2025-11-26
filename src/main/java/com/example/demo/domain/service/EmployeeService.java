@@ -47,4 +47,8 @@ public class EmployeeService {
                         Collectors.mapping(EmployeeVO::name, Collectors.toList()) // A downstream collector to transform the values in each group
                 ));
     }
+
+    public String verifyEmployeeId(Integer id) {
+        return employeeRepository.findById(id);
+    }
 }

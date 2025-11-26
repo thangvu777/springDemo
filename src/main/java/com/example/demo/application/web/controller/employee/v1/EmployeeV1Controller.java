@@ -1,7 +1,9 @@
 package com.example.demo.application.web.controller.employee.v1;
 
 import com.example.demo.domain.service.EmployeeService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -32,4 +34,11 @@ public class EmployeeV1Controller {
     public Map<String, List<String>> getHighEarningEmployeesByDepartment() {
         return employeeService.getHighEarningEmployeesByDepartment();
     }
+
+    @GetMapping("/{employeeId}")
+    public ResponseEntity<String> checkEmployeeId(@PathVariable Integer employeeId){
+                String result = employeeService.verifyEmployeeId(employeeId);
+                return result != null ? ResponseEntity.ok(result) : ResponseEntity.notFound().build();
+    }
+
 }
