@@ -20,7 +20,7 @@ public class StockSpanner {
         private int next(Integer price){
             index++;
             prices.add(price);
-            while(!pgp.isEmpty() || prices.get(pgp.peek()) <= price) {
+            while(!pgp.isEmpty() && prices.get(pgp.peek()) <= price) {
                 pgp.pop();
             }
             int span;
@@ -32,6 +32,21 @@ public class StockSpanner {
         }
 
         static void main() {
-            IO.println("HelloWorld!");
+            StockSpanner ss = new StockSpanner();
+
+            // Input: [100, 80, 60, 70, 60, 75, 85]
+            System.out.println(ss.next(100)); // Price 100: Span is 1
+            System.out.println(ss.next(80));  // Price 80: Span is 1 (80 > 100 is false)
+            System.out.println(ss.next(60));  // Price 60: Span is 1 (60 > 80 is false)
+            System.out.println(ss.next(70));  // Price 70: Span is 2 (70 > 60 and 70 <= 80)
+            System.out.println(ss.next(60));  // Price 60: Span is 1 (60 <= 70)
+            System.out.println(ss.next(75));  // Price 75: Span is 4 (75 > 60, 75 > 70, 75 > 60, 75 <= 80)
+            System.out.println(ss.next(85));  // Price 85: Span is 6 (85 > 75, 85 > 60, etc.)
+            System.out.println(ss.next(40));  // Price 85: Span is 6 (85 > 75, 85 > 60, etc.)
+            System.out.println(ss.next(110));  // Price 85: Span is 6 (85 > 75, 85 > 60, etc.)
+            System.out.println(ss.next(37));  // Price 85: Span is 6 (85 > 75, 85 > 60, etc.)
+            System.out.println(ss.next(38));  // Price 85: Span is 6 (85 > 75, 85 > 60, etc.)
+            System.out.println(ss.next(40));  // Price 85: Span is 6 (85 > 75, 85 > 60, etc.)
+            System.out.println(ss.next(45));  // Price 85: Span is 6 (85 > 75, 85 > 60, etc.)
         }
 }
