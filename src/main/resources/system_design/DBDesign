@@ -1,0 +1,17 @@
+1. Shared DB (Anti-pattern)
+Cons: Coupled DB tables, can cause lock down if one service fails
+
+2. SAGA, where every microservice has it's own DB.
+Overhead: Managing transactions that affect multiple rows in different tables.
+Need for ACID (Atomticity, need to be able to roll back)
+
+3. API Composition
+Parent service leveraging other services through API's
+CQRS: Command Query Responsibility Segregation a pattern that separates an application's write operations (commands) from its read operations (queries)
+Pros: Scaling Read DB's and Write DB's horizontally very easily depending on load necessary
+Cons: Ensuring Write DB replicates new data on view DB's on every update adding load to system
+
+4. Event Sourcing
+(Order cart for users)
+Use Kafka to stream messages and trigger processes that update the view DB.
+The view DB listens and reacts to events in the queue.
